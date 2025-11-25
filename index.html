@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LerenAcademic Suite</title>
+    <!-- Carga de Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Lucide Icons (alternativa simple para iconos) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Configuración personalizada de Tailwind */
+        :root {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Animaciones para el Hero */
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+        .animate-blob {
+            animation: blob 7s infinite cubic-bezier(0.6, -0.28, 0.735, 0.045);
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#top" class="flex items-center group cursor-pointer" onclick="handleScrollTo('top')">
+                    <div class="bg-slate-900 text-white p-1.5 rounded-lg mr-2 transition-transform group-hover:rotate-12">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900">LerenAcademic</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center" id="desktop-menu">
+                    <button onclick="handleScrollTo('top')" class="text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">Inicio</button>
+                    <button onclick="handleScrollTo('ecosistema')" class="text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">Ecosistema</button>
+                    <button onclick="handleScrollTo('veya')" class="text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">VeyaSchool</button>
+                    <button onclick="handleScrollTo('comparativa')" class="text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">Planes</button>
+                    <button onclick="handleScrollTo('demo')" class="inline-flex items-center justify-center px-6 py-2 border text-sm font-medium rounded-xl focus:outline-none transition-all duration-300 transform active:scale-95 border-transparent text-white bg-slate-900 hover:bg-slate-800 hover:-translate-y-1 shadow-lg hover:shadow-slate-900/20">
+                        Solicitar Demo
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-600 hover:text-slate-900 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                        <i data-lucide="x" class="w-6 h-6 hidden" id="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu-dropdown" class="hidden md:hidden bg-white border-t border-slate-100 shadow-xl absolute w-full transition-all duration-300 ease-out">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <button onclick="handleScrollTo('top')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Inicio</button>
+                <button onclick="handleScrollTo('ecosistema')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Ecosistema</button>
+                <button onclick="handleScrollTo('veya')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">VeyaSchool</button>
+                <button onclick="handleScrollTo('comparativa')" class="block w-full text-left px-3 py-3 text-base font-medium text-slate-700 hover:bg-slate-50 rounded-md">Planes</button>
+                <button onclick="handleScrollTo('demo')" class="block w-full text-left px-3 py-3 text-base font-medium text-blue-600 bg-blue-50 rounded-md">Solicitar Demo</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="top" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Abstract Background Shapes -->
+        <div class="absolute top-0 right-0 -translate-y-12 translate-x-12 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
+        <div class="absolute top-0 left-0 -translate-y-12 -translate-x-12 w-96 h-96 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-8">
+                    <span class="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
+                    <span class="text-sm font-medium text-blue-700">Leren (Neerlandés): Aprender</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
+                    Tecnología que impulsa <br class="hidden md:block" />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+                        el aprendizaje.
+                    </span>
+                </h1>
+                
+                <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Una plataforma integral que transforma la forma en que enseñamos, aprendemos y gestionamos la escuela. Unificando innovación y simplicidad.
+                </p>
+                
+                <div class="flex flex-col items-center gap-8">
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="handleScrollTo('demo')" class="inline-flex items-center justify-center px-6 py-3 border text-base font-medium rounded-xl focus:outline-none transition-all duration-300 transform active:scale-95 border-transparent text-white bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-blue-500/30 hover:-translate-y-1">
+                            Solicitar Demo
+                        </button>
+                        <button onclick="handleScrollTo('ecosistema')" class="inline-flex items-center justify-center px-6 py-3 border text-base font-medium rounded-xl focus:outline-none transition-all duration-300 transform active:scale-95 border-slate-200 text-slate-700 bg-white hover:bg-slate-50 shadow-sm hover:border-slate-300 hover:-translate-y-1">
+                            Explorar Herramientas
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4 mt-4">
+                        <div class="flex items-center p-4 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow duration-300 min-w-[200px]">
+                            <div class="mr-3 p-2 bg-blue-50 rounded-lg text-blue-600">
+                                <i data-lucide="layers" class="w-5 h-5"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="font-bold text-slate-900 text-sm">Suite</div>
+                                <div class="text-xs text-slate-500">Hub de herramientas educativas</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow duration-300 min-w-[200px]">
+                            <div class="mr-3 p-2 bg-blue-50 rounded-lg text-blue-600">
+                                <i data-lucide="shield" class="w-5 h-5"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="font-bold text-slate-900 text-sm">Seguridad</div>
+                                <div class="text-xs text-slate-500">SSL, roles y monitoreo 24/7</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard & Pricing Mockups -->
+            <div class="relative mt-8 flex flex-col lg:flex-row justify-center items-center lg:items-start group">
+                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-b from-slate-100/50 to-white/0 rounded-[3rem] -z-10 blur-xl group-hover:bg-slate-200/50 transition-colors duration-1000"></div>
+                 
+                 <!-- DashboardMockupCard -->
+                 <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 max-w-md w-full mx-auto relative z-20 hover:scale-[1.02] transition-transform duration-500">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <div class="text-xs text-slate-400 font-medium mb-1">LerenAcademic</div>
+                            <h3 class="text-xl font-bold text-slate-900">Panel de control docente</h3>
+                        </div>
+                        <div class="text-xs text-slate-500 bg-slate-50 px-2 py-1 rounded border border-slate-100">
+                            Institución: Demo
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl p-6 mb-6 flex items-center justify-between border border-slate-50">
+                        <div class="text-center px-4 border-r border-slate-200">
+                            <div class="text-4xl font-extrabold text-slate-900 animate-pulse">86%</div>
+                            <div class="text-sm text-slate-500 font-medium">Nivel de logro</div>
+                        </div>
+                        <div class="pl-6 flex-grow">
+                            <div class="text-sm text-slate-500 mb-2 font-medium">Actividades pendientes</div>
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-sm text-slate-700 font-medium">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-2"></span>
+                                    Matemáticas - Tarea 3
+                                </li>
+                                <li class="flex items-center text-sm text-slate-700 font-medium">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-2"></span>
+                                    Ciencias - Proyecto
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors shadow-lg shadow-blue-500/20">
+                            Abrir Dashboard
+                        </button>
+                        <button class="flex-1 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium py-2.5 px-4 rounded-lg text-sm transition-colors">
+                            Ver VeyaSchool
+                        </button>
+                    </div>
+                 </div>
+
+                 <!-- PricingMockupCard -->
+                 <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 max-w-sm w-full mx-auto relative z-10 lg:-ml-12 lg:mt-12 mt-6 transform transition-transform hover:-translate-y-2 duration-300">
+                    <div class="text-sm text-slate-500 mb-2">Plan Institucional</div>
+                    <div class="flex items-baseline mb-4">
+                        <span class="text-4xl font-extrabold text-slate-900">Q. 7.00</span>
+                        <span class="text-slate-500 ml-2 text-sm font-medium">/ usuario / mes</span>
+                    </div>
+                    
+                    <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+                        Incluye: soporte, exportación PDF, control de roles y panel administrativo.
+                    </p>
+
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-lg shadow-blue-500/20">
+                        Solicitar Demo & Cotización
+                    </button>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand / About Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900 mb-6">¿Qué es Leren Suite?</h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        LerenAcademic es un ecosistema digital diseñado meticulosamente para maestros, directores, estudiantes e instituciones modernas. Nuestra suite integra recursos gratuitos y herramientas premium bajo una misma identidad.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center group">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200 mr-3 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check-circle" class="h-3 w-3 text-blue-600"></i>
+                            </div>
+                            <span class="text-slate-700 font-medium">Aprender es el centro de todo.</span>
+                        </div>
+                        <div class="flex items-center group">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200 mr-3 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check-circle" class="h-3 w-3 text-blue-600"></i>
+                            </div>
+                            <span class="text-slate-700 font-medium">Tecnología para mejorar la experiencia educativa.</span>
+                        </div>
+                        <div class="flex items-center group">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center border border-blue-200 mr-3 group-hover:scale-110 transition-transform">
+                                <i data-lucide="check-circle" class="h-3 w-3 text-blue-600"></i>
+                            </div>
+                            <span class="text-slate-700 font-medium">Gestión administrativa simplificada.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
+                    <blockquote class="text-xl font-medium text-slate-800 italic mb-4">
+                        "Transformando la escuela en una experiencia digital fluida y accesible."
+                    </blockquote>
+                    <p class="text-slate-500 font-medium">— La visión de Leren</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Ecosystem Tools -->
+    <section id="ecosistema" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-slate-900">
+                    Herramientas del Ecosistema
+                </h2>
+                <p class="text-lg max-w-2xl mx-auto text-slate-600">
+                    Recursos potentes y gratuitos diseñados para empoderar al docente moderno.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature Card 1 -->
+                <div class="group relative bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-50 rounded-lg group-hover:bg-blue-600 transition-colors duration-300">
+                            <i data-lucide="bar-chart-2" class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300"></i>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Gratis</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Dashboard Docente</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">Informes individuales de rendimiento, análisis de habilidades (0-100%) y detección de inteligencias múltiples.</p>
+                    <div class="mt-auto">
+                        <a href="https://esantizo-sb.github.io/Dashboard/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 group-hover:underline">
+                            Acceder a la herramienta <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Feature Card 2 -->
+                <div class="group relative bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-50 rounded-lg group-hover:bg-blue-600 transition-colors duration-300">
+                            <i data-lucide="calendar" class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300"></i>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Gratis</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Planificador Dinámico</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">Planificación académica detallada por competencias. Exportación profesional en PDF y DOCX con tu logo.</p>
+                    <div class="mt-auto">
+                        <a href="https://esantizo-sb.github.io/planificacion/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 group-hover:underline">
+                            Acceder a la herramienta <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Feature Card 3 -->
+                <div class="group relative bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-50 rounded-lg group-hover:bg-blue-600 transition-colors duration-300">
+                            <i data-lucide="brain" class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300"></i>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">AI Powered</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">EduGame AI Platform</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">Creación de cursos y material educativo asistido por Inteligencia Artificial sobre cualquier tema.</p>
+                    <div class="mt-auto">
+                        <a href="https://portalstart.github.io/cursos/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 group-hover:underline">
+                            Acceder a la herramienta <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Feature Card 4 -->
+                <div class="group relative bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl hover:border-blue-100 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-blue-50 rounded-lg group-hover:bg-blue-600 transition-colors duration-300">
+                            <i data-lucide="layout" class="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300"></i>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Gratis</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">EduBoard LMS</h3>
+                    <p class="text-slate-600 mb-6 flex-grow text-sm leading-relaxed">Plataforma LMS ideal para colegios. Gestiona cursos, actividades, tareas y control de estudiantes.</p>
+                    <div class="mt-auto">
+                        <a href="https://portalstart.github.io/lms/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-600 font-semibold text-sm hover:text-blue-700 group-hover:underline">
+                            Acceder a la herramienta <i data-lucide="arrow-right" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Product - VeyaSchool -->
+    <section id="veya" class="py-24 bg-slate-900 text-white overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-900/20 blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <div class="inline-flex items-center space-x-2 bg-blue-900/50 border border-blue-700/50 rounded-full px-4 py-1.5 mb-6">
+                        <i data-lucide="zap" class="w-4 h-4 text-yellow-400"></i>
+                        <span class="text-sm font-medium text-blue-100">Producto Premium</span>
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">VeyaSchool</h2>
+                    <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+                        El sistema académico institucional definitivo. Control total para directores, administración eficiente para secretarias y claridad para padres y alumnos.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="activity" class="text-blue-400 w-5 h-5"></i>
+                            <span class="text-slate-200">Promedios Automáticos</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="users" class="text-blue-400 w-5 h-5"></i>
+                            <span class="text-slate-200">Roles Granulares</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="server" class="text-blue-400 w-5 h-5"></i>
+                            <span class="text-slate-200">Exportación PDF</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="shield-check" class="text-blue-400 w-5 h-5"></i>
+                            <span class="text-slate-200">Auditoría de Actividad</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 items-center">
+                        <a href="https://portalstart.github.io/notasV4/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 border text-base font-medium rounded-xl focus:outline-none transition-all duration-300 transform active:scale-95 border-transparent text-white bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-blue-500/30 hover:-translate-y-1">
+                            Ver Demo en Vivo
+                        </a>
+                        <div class="text-slate-400 text-sm">
+                            Licencias desde <span class="text-white font-bold text-lg">Q. 7.00</span> /usuario/mes
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Box Updated -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700 hover:bg-slate-800 transition-colors duration-500">
+                    <h3 class="text-xl font-semibold mb-6 flex items-center">
+                        <i data-lucide="lock" class="w-5 h-5 mr-2 text-green-400"></i> 
+                        Seguridad de Clase Mundial
+                    </h3>
+                    <ul class="space-y-5">
+                        <!-- Autenticación (DB Auth) -->
+                        <li class="flex items-start">
+                            <div class="bg-slate-700 p-1.5 rounded mr-3 mt-1">
+                                <i data-lucide="users" class="w-4 h-4 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-sm">Autenticación (DB Auth)</strong>
+                                <span class="text-slate-400 text-sm block leading-snug mt-0.5">Asegura que solo usuarios registrados ingresen al sistema.</span>
+                            </div>
+                        </li>
+                        <!-- Roles y permisos (RBAC) -->
+                        <li class="flex items-start">
+                            <div class="bg-slate-700 p-1.5 rounded mr-3 mt-1">
+                                <i data-lucide="key" class="w-4 h-4 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-sm">Roles y permisos (RBAC)</strong>
+                                <span class="text-slate-400 text-sm block leading-snug mt-0.5">Control de acceso jerárquico y granular.</span>
+                            </div>
+                        </li>
+                        <!-- Seguridad por fila (RLS) -->
+                        <li class="flex items-start">
+                            <div class="bg-slate-700 p-1.5 rounded mr-3 mt-1">
+                                <i data-lucide="database" class="w-4 h-4 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-sm">Seguridad por fila (RLS)</strong>
+                                <span class="text-slate-400 text-sm block leading-snug mt-0.5">Aislamiento total de datos por usuario.</span>
+                            </div>
+                        </li>
+                        <!-- Funciones seguras (RPC/Policies) -->
+                        <li class="flex items-start">
+                            <div class="bg-slate-700 p-1.5 rounded mr-3 mt-1">
+                                <i data-lucide="shield-check" class="w-4 h-4 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-sm">Funciones seguras (RPC/Policies)</strong>
+                                <span class="text-slate-400 text-sm block leading-snug mt-0.5">Lógica de negocio protegida y validada.</span>
+                            </div>
+                        </li>
+                        <!-- Seguridad de archivos (Storage) -->
+                        <li class="flex items-start">
+                            <div class="bg-slate-700 p-1.5 rounded mr-3 mt-1">
+                                <i data-lucide="file-text" class="w-4 h-4 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-white text-sm">Seguridad de archivos (Storage)</strong>
+                                <span class="text-slate-400 text-sm block leading-snug mt-0.5">Almacenamiento encriptado y privado.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparativa" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-slate-900">
+                    Comparativa de Soluciones
+                </h2>
+                <p class="text-lg max-w-2xl mx-auto text-slate-600">
+                    Elige las herramientas que tu institución necesita.
+                </p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[700px]">
+                    <thead>
+                        <tr>
+                            <th class="p-4 border-b-2 border-slate-100 text-slate-500 font-medium">Característica</th>
+                            <th class="p-4 border-b-2 border-slate-100 font-semibold text-slate-900">Dashboard & Planificador</th>
+                            <th class="p-4 border-b-2 border-slate-100 font-semibold text-slate-900">EduBoard (LMS)</th>
+                            <th class="p-4 border-b-2 border-blue-600 bg-blue-50 text-blue-700 font-bold rounded-t-lg">VeyaSchool Premium</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm text-slate-700">
+                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                            <td class="p-4 font-medium">Uso Ideal</td>
+                            <td class="p-4">Docente Individual</td>
+                            <td class="p-4">Clases y Tareas</td>
+                            <td class="p-4 bg-blue-50/30 font-semibold text-blue-900">Gestión Institucional</td>
+                        </tr>
+                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                            <td class="p-4 font-medium">Registro de Notas</td>
+                            <td class="p-4 text-slate-400">—</td>
+                            <td class="p-4 text-slate-400">—</td>
+                            <td class="p-4 bg-blue-50/30"><i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                            <td class="p-4 font-medium">Roles (Admin/Dir/Prof)</td>
+                            <td class="p-4 text-slate-400">—</td>
+                            <td class="p-4">Básico</td>
+                            <td class="p-4 bg-blue-50/30"><i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i></td>
+                        </tr>
+                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                            <td class="p-4 font-medium">Seguridad Avanzada</td>
+                            <td class="p-4 text-slate-400">—</td>
+                            <td class="p-4 text-slate-400">—</td>
+                            <td class="p-4 bg-blue-50/30"><i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i></td>
+                        </tr>
+                         <tr>
+                            <td class="p-4"></td>
+                            <td class="p-4"><span class="text-slate-500 font-bold">Gratis</span></td>
+                            <td class="p-4"><span class="text-slate-500 font-bold">Gratis</span></td>
+                            <td class="p-4 bg-blue-50/30"><span class="text-blue-600 font-bold">Q. 7.00 /usuario/mes</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Form Section -->
+    <section id="demo" class="py-24 bg-slate-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-slate-100 transform hover:scale-[1.01] transition-transform duration-500">
+                <div class="mb-12 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-slate-900">
+                        Solicita una Demo
+                    </h2>
+                    <p class="text-lg max-w-2xl mx-auto text-slate-600">
+                        Descubre cómo LerenAcademic puede transformar tu institución hoy mismo.
+                    </p>
+                </div>
+                
+                <form id="demo-form" class="space-y-6 mt-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nombre Completo</label>
+                            <input required type="text" id="name" name="name" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+                        </div>
+                        <div>
+                            <label for="institution" class="block text-sm font-medium text-slate-700 mb-1">Institución</label>
+                            <input required type="text" id="institution" name="institution" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+                            <input required type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Correo Electrónico</label>
+                            <input required type="email" id="email" name="email" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition" />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                         <div>
+                            <label for="students" class="block text-sm font-medium text-slate-700 mb-1">Número de Estudiantes</label>
+                            <select id="students" name="students" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white">
+                                <option value="">Seleccione un rango</option>
+                                <option value="0-100">Menos de 100</option>
+                                <option value="100-500">100 - 500</option>
+                                <option value="500-1000">500 - 1000</option>
+                                <option value="1000+">Más de 1000</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="interest" class="block text-sm font-medium text-slate-700 mb-1">Mayor Interés</label>
+                            <select id="interest" name="interest" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-white">
+                                <option value="VeyaSchool">VeyaSchool (Sistema Institucional)</option>
+                                <option value="Dashboard">Dashboard Docente</option>
+                                <option value="Planificador">Planificador de Clases</option>
+                                <option value="EduGame">EduGame AI</option>
+                                <option value="EduBoard">EduBoard LMS</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="inline-flex items-center justify-center w-full py-4 text-lg font-semibold rounded-xl focus:outline-none transition-all duration-300 transform active:scale-95 border-transparent text-white bg-blue-600 hover:bg-blue-700 shadow-xl group">
+                            Enviar Solicitud
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-slate-900 text-white p-1 rounded mr-2">
+                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-lg font-bold text-slate-900">LerenAcademic</span>
+                    </div>
+                    <p class="text-slate-500 text-sm max-w-sm mb-6">
+                        Aprender, gestionar y crecer. Tecnología educativa confiable diseñada para el futuro de las instituciones en Latinoamérica.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-slate-900 mb-4">Plataforma</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li><button onclick="handleScrollTo('ecosistema')" class="hover:text-blue-600">Herramientas Gratuitas</button></li>
+                        <li><button onclick="handleScrollTo('veya')" class="hover:text-blue-600">VeyaSchool Premium</button></li>
+                        <li><button onclick="handleScrollTo('comparativa')" class="hover:text-blue-600">Precios</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-slate-900 mb-4">Contacto</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li>Soporte Técnico</li>
+                        <li>Ventas Corporativas</li>
+                        <li>info@lerenacademic.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-100 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <p>&copy; 2024 LerenAcademic Suite. Todos los derechos reservados.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <span>Privacidad</span>
+                    <span>Términos</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top-button" class="fixed bottom-8 right-8 p-3 bg-blue-600 text-white rounded-full shadow-2xl hover:bg-blue-700 transition-all duration-300 hover:scale-110 z-50 hidden" aria-label="Volver arriba">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <script>
+        // Función de inicialización de Lucide Icons para que se muestren
+        lucide.createIcons();
+
+        // --- JavaScript para la interactividad ---
+
+        // 1. Estado y manejo del menú móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuDropdown = document.getElementById('mobile-menu-dropdown');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenuDropdown.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                mobileMenuDropdown.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+            lucide.createIcons(); // Vuelve a renderizar iconos por si acaso
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // 2. Función de scroll
+        function handleScrollTo(id) {
+            if (id === 'top') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            // Cerrar menú móvil al hacer click en un enlace
+            if (isMenuOpen) {
+                toggleMobileMenu();
+            }
+        }
+
+        // 3. Botón de volver arriba
+        const scrollTopButton = document.getElementById('scroll-top-button');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollTopButton.classList.remove('hidden');
+            } else {
+                scrollTopButton.classList.add('hidden');
+            }
+        });
+
+        scrollTopButton.addEventListener('click', () => handleScrollTo('top'));
+
+
+        // 4. Manejo del Formulario (Mailto)
+        const demoForm = document.getElementById('demo-form');
+
+        demoForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                institution: document.getElementById('institution').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                students: document.getElementById('students').value,
+                interest: document.getElementById('interest').value,
+            };
+
+            // Construir el enlace mailto
+            const subject = encodeURIComponent(`Solicitud de Demo LerenAcademic - ${formData.institution}`);
+            const body = encodeURIComponent(
+                `Hola equipo de LerenAcademic,\n\n` +
+                `Estoy interesado en solicitar una demo.\n\n` +
+                `Detalles del solicitante:\n` +
+                `-----------------------\n` +
+                `Nombre: ${formData.name}\n` +
+                `Institución: ${formData.institution}\n` +
+                `Teléfono: ${formData.phone}\n` +
+                `Correo: ${formData.email}\n` +
+                `Estudiantes: ${formData.students}\n` +
+                `Interés principal: ${formData.interest}\n\n` +
+                `Quedo a la espera de su respuesta.\n` +
+                `Saludos.`
+            );
+
+            const mailtoLink = `mailto:san.porta2@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Abrir cliente de correo
+            window.location.href = mailtoLink;
+        });
+
+    </script>
+</body>
+</html>
